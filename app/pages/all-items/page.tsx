@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -35,7 +34,7 @@ const MenuPage = () => {
     "soft-drinks",
   ];
   console.log("Fetched items:", items); // Debugging line to check fetched items
-  const getItemsByCategory = (cat: any) =>
+  const getItemsByCategory = (cat: an) =>
     items.filter((item) => item.category === cat);
 
   return (
@@ -62,7 +61,6 @@ const MenuPage = () => {
             {getItemsByCategory(cat).map((item) => (
               <Link key={item._id} href={`/pages/all-items/${item._id}`}>
                 <motion.div
-                  
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="min-w-[250px] bg-white/40 backdrop-blur-md rounded-xl shadow-lg p-4 border border-white/30 flex flex-col hover:cursor-pointer"

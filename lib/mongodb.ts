@@ -1,5 +1,10 @@
 import { MongoClient } from "mongodb"
 
+declare global {
+  // eslint-disable-next-line no-var
+  var _mongoClientPromise: Promise<MongoClient> | undefined;
+}
+
 const uri = process.env.MONGODB_URI as string
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
@@ -10,11 +15,11 @@ if (!process.env.MONGODB_URI) {
 
 if (process.env.NODE_ENV === "development") {
   // dev mode এ একই কানেকশন reuse করবে
-  if (!(global as any)._mongoClientPromise) {
+  if (!global._mongoClientPromise) {
     client = new MongoClient(uri)
-    ;(global as any)._mongoClientPromise = client.connect()
+    ;global._mongoClientPromise = client.connect()
   }
-  clientPromise = (global as any)._mongoClientPromise
+  clientPromise = global._mongoClientPromise
 } else {
   // production mode
   client = new MongoClient(uri)

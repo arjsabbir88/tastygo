@@ -20,6 +20,9 @@ const MenuPage = () => {
     const fetchData = async () => {
       const res = await fetch("http://localhost:5000/items"); // change with your API
       const data = await res.json();
+
+      console.log("Data fetched from API:", data); // Debugging line to check fetched data
+
       setItems(data);
     };
     fetchData();
@@ -34,9 +37,8 @@ const MenuPage = () => {
     "soft-drinks",
   ];
   console.log("Fetched items:", items); // Debugging line to check fetched items
-  const getItemsByCategory = (cat: any) =>
+  const getItemsByCategory = (cat: string) =>
     items.filter((item) => item.category === cat);
-
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 space-y-16">
       <h1 className="text-4xl font-bold text-center mb-10">

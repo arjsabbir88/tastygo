@@ -13,46 +13,58 @@ const AddProductForm = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
 
-      const dataToSend = {
-    ...formData,
-    price: parseFloat(formData.price).toFixed(2),
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    createdBy: "admin",
-  };
+    const dataToSend = {
+      ...formData,
+      price: parseFloat(formData.price).toFixed(2),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      createdBy: "admin",
+    };
 
-  console.log("Data to send:", dataToSend);
+    console.log("Data to send:", dataToSend);
 
-     try {
-    const res = await fetch("http://localhost:5000/add-items", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    });
+    try {
+      const res = await fetch("http://localhost:5000/add-items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
 
-    if (!res.ok) {
-      throw new Error("Failed to add product");
+      if (!res.ok) {
+        throw new Error("Failed to add product");
+      }
+
+      setLoading(false);
+      alert("✅ Product Added Successfully!");
+      setFormData({
+        name: "",
+        description: "",
+        price: "",
+        image: "",
+        category: "",
+      });
+    } catch (error) {
+      console.error("Error while adding product:", error);
+      setLoading(false);
+      alert("❌ Failed to add product!");
     }
-
-    setLoading(false);
-    alert("✅ Product Added Successfully!");
-    setFormData({ name: "", description: "", price: "", image: "", category: "" });
-  } catch (error) {
-    console.error("Error while adding product:", error);
-    setLoading(false);
-    alert("❌ Failed to add product!");
-  }
-    setFormData({ name: "", description: "", price: "", image: "", category: "" });
+    setFormData({
+      name: "",
+      description: "",
+      price: "",
+      image: "",
+      category: "",
+    });
   };
 
   return (
@@ -106,7 +118,9 @@ const AddProductForm = () => {
 
         {/* Price */}
         <motion.div whileFocus={{ scale: 1.02 }} className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Price ($)</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Price ($)
+          </label>
           <input
             type="number"
             name="price"
@@ -118,7 +132,9 @@ const AddProductForm = () => {
           />
         </motion.div>
         <motion.div whileFocus={{ scale: 1.02 }} className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Category</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Category
+          </label>
           <input
             type="text"
             name="category"
@@ -132,7 +148,9 @@ const AddProductForm = () => {
 
         {/* Image URL */}
         <motion.div whileFocus={{ scale: 1.02 }} className="mb-6">
-          <label className="block text-gray-700 font-medium mb-2">Image URL</label>
+          <label className="block text-gray-700 font-medium mb-2">
+            Image URL
+          </label>
           <input
             type="text"
             name="image"
