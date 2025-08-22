@@ -108,7 +108,7 @@ const NavBar = () => {
           <summary>Items</summary>
           <ul className="p-2 glass rounded-lg space-y-2 min-w-xs w-full">
             <li className="hover:bg-orange-600 hover:text-white rounded">
-              <Link href="/ice-cream">All Items</Link>
+              <Link href="/pages/all-items">All Items</Link>
             </li>
             <li className="hover:bg-orange-600 hover:text-white rounded">
               <Link href="/ice-cream">Ice Cream</Link>
