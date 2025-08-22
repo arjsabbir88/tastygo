@@ -29,7 +29,7 @@ const AddProductForm = () => {
       createdBy: "admin",
     };
 
-    console.log("Data to send:", dataToSend);
+
 
     try {
       const res = await fetch("http://localhost:5000/add-items", {

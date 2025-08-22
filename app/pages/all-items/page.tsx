@@ -33,8 +33,7 @@ const MenuPage = () => {
     "sandwich",
     "soft-drinks",
   ];
-  console.log("Fetched items:", items); // Debugging line to check fetched items
-  const getItemsByCategory = (cat: an) =>
+  const getItemsByCategory = (cat: string) =>
     items.filter((item) => item.category === cat);
 
   return (

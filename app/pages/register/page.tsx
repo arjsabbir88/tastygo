@@ -25,10 +25,19 @@ export default function LoginPage() {
   const handleRegister = async () => {
     setLoading(true);
     const payload = { name, email, password };
-    console.log("Registering user with payload:", payload);
+    
 
     const result = await registerUser(payload);
-    console.log(result);
+
+    if (result.success) {
+      alert("Registration successful! Please log in.");
+      setName("");
+      setEmail("");
+      setPassword("");
+    } else {
+      alert(`❌ Registration failed: ${result.message}`);
+    }
+    
     setLoading(false);
   };
 

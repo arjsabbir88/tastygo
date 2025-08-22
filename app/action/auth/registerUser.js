@@ -3,7 +3,6 @@
 import dbConnect, { collectionNames } from "@/lib/dbConnect";
 
 export const registerUser = async (payload) => {
-  console.log("Payload received in registerUser:", payload);
   try {
     const { email } = payload;
 
@@ -17,7 +16,7 @@ export const registerUser = async (payload) => {
         message: "User already exists",
       };
     }
-    
+
     const result = await users.insertOne(payload);
     return {
       acknowledged: result.acknowledged,

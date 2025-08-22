@@ -22,7 +22,7 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
-    console.log(email, password )
+  
 
     const res = await signIn("credentials", {
       redirect: false,

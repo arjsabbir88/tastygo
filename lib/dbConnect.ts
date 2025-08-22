@@ -1,35 +1,16 @@
-// import { MongoClient, ServerApiVersion } from "mongodb"
-
-// export const collectionNames = {
-//   userCollection: "users"
-// }
-
-
-// function dbConnect(collectionName) {
-//     const uri = process.env.MONGODB_URI
-
-//     // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-//     const client = new MongoClient(uri, {
-//         serverApi: {
-//             version: ServerApiVersion.v1,
-//             strict: true,
-//             deprecationErrors: true,
-//         }
-//     });
-
-//     return client.db(process.env.DB_NAME).collection(collectionName)
-// }
-
-// export default dbConnect;
-
 
 import { MongoClient, ServerApiVersion } from "mongodb"
 
 if (!process.env.MONGODB_URI) {
-  throw new Error("❌ Please add MONGODB_URI to .env.local")
+  throw new Error("Please add MONGODB_URI to .env.local")
 }
 if (!process.env.DB_NAME) {
-  throw new Error("❌ Please add DB_NAME to .env.local")
+  throw new Error("Please add DB_NAME to .env.local")
+}
+
+declare global {
+  // eslint-disable-next-line no-var
+  var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
 const uri = process.env.MONGODB_URI
@@ -45,17 +26,16 @@ let client: MongoClient
 let clientPromise: Promise<MongoClient>
 
 if (process.env.NODE_ENV === "development") {
-  if (!(global as any)._mongoClientPromise) {
+  if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options)
-    ;(global as any)._mongoClientPromise = client.connect()
+    ;global._mongoClientPromise = client.connect()
   }
-  clientPromise = (global as any)._mongoClientPromise
+  clientPromise = global._mongoClientPromise
 } else {
   client = new MongoClient(uri, options)
   clientPromise = client.connect()
 }
 
-// ✅ function to get collection
 async function dbConnect(collectionName: string) {
   const client = await clientPromise
   const db = client.db(process.env.DB_NAME)

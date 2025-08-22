@@ -20,9 +20,6 @@ const MenuPage = () => {
     const fetchData = async () => {
       const res = await fetch("http://localhost:5000/items"); // change with your API
       const data = await res.json();
-
-      console.log("Data fetched from API:", data); // Debugging line to check fetched data
-
       setItems(data);
     };
     fetchData();
@@ -36,7 +33,7 @@ const MenuPage = () => {
     "sandwich",
     "soft-drinks",
   ];
-  console.log("Fetched items:", items); // Debugging line to check fetched items
+
   const getItemsByCategory = (cat: string) =>
     items.filter((item) => item.category === cat);
   return (
