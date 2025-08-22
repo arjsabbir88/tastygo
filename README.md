@@ -1,8 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TastyGo 🍕🍔🍦
 
-## Getting Started
+TastyGo is a modern, full-stack food ordering web application. Discover, browse, and order your favorite dishes—from artisan pizzas to decadent desserts. Built with Next.js for the frontend and Express.js + MongoDB for the backend, TastyGo delivers a seamless and delicious user experience.
 
-First, run the development server:
+**Live Site:** [https://tastygo-8d15.vercel.app](https://tastygo-8d15.vercel.app)
+
+---
+
+## 🚀 Features
+
+- Beautiful, responsive UI with Next.js and Tailwind CSS
+- Dynamic food menu with categories (Pizza, Burger, Ice Cream, etc.)
+- User authentication (NextAuth)
+- Real-time data fetching from Express.js backend (MongoDB)
+- Smooth animations with Framer Motion
+
+---
+
+## 🛠️ Setup & Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/tastygo.git
+cd tastygo
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+### 3. Set up environment variables
+
+Create a `.env` file in the root directory and add your MongoDB and NextAuth credentials:
+
+```
+MONGODB_URI=your_mongodb_uri
+NEXTAUTH_SECRET=your_nextauth_secret
+```
+
+### 4. Run the development server
 
 ```bash
 npm run dev
