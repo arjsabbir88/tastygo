@@ -1,10 +1,10 @@
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar/NavBar";
 import { usePathname } from "next/navigation";
 import ClientLayout from "./components/ClientLayout/ClientLayout";
+import NextAuthSessionProvider from "@/provider/NextAuthSessionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,16 +27,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme= "light">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-300 text-base-content min-h-screen`}
-      >
-        {/* <div className="z-50 sticky top-0 left-0 w-full">
+    <html lang="en" data-theme="light">
+      <NextAuthSessionProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-base-300 text-base-content min-h-screen`}
+        >
+          {/* <div className="z-50 sticky top-0 left-0 w-full">
           {<NavBar/>}
         </div> */}
-        <ClientLayout>{children}</ClientLayout>
-        
-      </body>
+          <ClientLayout>{children}</ClientLayout>
+        </body>
+      </NextAuthSessionProvider>
     </html>
   );
 }

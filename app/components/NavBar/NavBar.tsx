@@ -92,6 +92,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { nav } from "framer-motion/client";
+import LoginButton from "../LoginButton/LoginButton";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -177,7 +178,13 @@ const NavBar = () => {
             {/* Right (Auth + Button) */}
             <div className="hidden lg:flex items-center gap-4">
               <ul className="menu menu-horizontal font-medium text-gray-800">
-                {authLinks}
+                {/* {authLinks} */}
+                <li>
+                  <LoginButton/>
+                </li>
+                <li>
+                  <Link href="/pages/register">Register</Link>
+                </li>
               </ul>
               <motion.a
                 whileHover={{ scale: 1.1 }}
