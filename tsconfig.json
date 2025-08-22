@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "provider/NextAuthSessionProvider.js", "lib/dbConnect.ts", "app/api/auth/[...nextauth]/route.js", "app/action/auth/registerUser.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "provider/NextAuthSessionProvider.js", "lib/dbConnect.ts", "app/api/auth/[...nextauth]/route.ts", "app/action/auth/registerUser.js"],
   "exclude": ["node_modules"]
 }
