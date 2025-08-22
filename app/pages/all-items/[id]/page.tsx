@@ -24,7 +24,7 @@ export default function ItemDetailsPage() {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`http://localhost:5000/items/${id}`)
+    fetch(`https://tastygo-server.vercel.app/items/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Not found");
         return res.json();
@@ -67,8 +67,8 @@ export default function ItemDetailsPage() {
         transition={{ duration: 0.6 }}
       >
         <Image
-          src={item.image || "/fallback.png"} // ✅ fallback image if missing
-          alt={item.name || "Item Image"} // ✅ alt text added
+          src={item.image} // ✅ fallback image if missing
+          alt={item.name} // ✅ alt text added
           fill
           className="object-cover"
           priority

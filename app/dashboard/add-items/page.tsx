@@ -13,7 +13,9 @@ const AddProductForm = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -29,10 +31,8 @@ const AddProductForm = () => {
       createdBy: "admin",
     };
 
-
-
     try {
-      const res = await fetch("http://localhost:5000/add-items", {
+      const res = await fetch("https://tastygo-server.vercel.app/add-items", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

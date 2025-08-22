@@ -11,9 +11,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Eye, EyeOff, Mail, Lock, Utensils, ChefHat } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { registerUser } from "@/app/action/auth/registerUser";
-import dbConnect, { collectionNames } from "@/lib/dbConnect";
+import { redirect } from "next/navigation";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,6 +21,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  
 
   const handleRegister = async () => {
     setLoading(true);
@@ -28,14 +29,11 @@ export default function LoginPage() {
     
 
     const result = await registerUser(payload);
+    console.log(result);
 
-    if (result.success) {
+    if (result.insertedId) {
       alert("Registration successful! Please log in.");
-      setName("");
-      setEmail("");
-      setPassword("");
-    } else {
-      alert(`❌ Registration failed: ${result.message}`);
+      redirect("/pages/login")
     }
     
     setLoading(false);

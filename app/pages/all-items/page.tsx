@@ -18,8 +18,9 @@ const MenuPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://localhost:5000/items"); // change with your API
+      const res = await fetch("https://tastygo-server.vercel.app/items"); // change with your API
       const data = await res.json();
+      console.log(data);
       setItems(data);
     };
     fetchData();
