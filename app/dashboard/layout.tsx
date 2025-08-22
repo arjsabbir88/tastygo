@@ -1,9 +1,21 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "loading") return; 
+    if (!session) {
+      redirect("/pages/login"); 
+    }
+  }, [session, status]);
+
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}

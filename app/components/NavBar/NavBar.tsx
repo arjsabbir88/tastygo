@@ -91,11 +91,13 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { nav } from "framer-motion/client";
+import { button, nav, p } from "framer-motion/client";
 import LoginButton from "../LoginButton/LoginButton";
+import { signOut, useSession } from "next-auth/react";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   const links = (
     <>
@@ -179,12 +181,18 @@ const NavBar = () => {
             <div className="hidden lg:flex items-center gap-4">
               <ul className="menu menu-horizontal font-medium text-gray-800">
                 {/* {authLinks} */}
-                <li>
-                  <LoginButton/>
-                </li>
-                <li>
-                  <Link href="/pages/register">Register</Link>
-                </li>
+                {session ? (
+                  <button onClick={()=>signOut()} className="text-lg bg-orange-600 text-white px-4 py-1 rounded-xl">Sign Out</button>
+                ) : (
+                  <>
+                    <li>
+                      <LoginButton />
+                    </li>
+                    <li>
+                      <Link href="/pages/register">Register</Link>
+                    </li>
+                  </>
+                )}
               </ul>
               <motion.a
                 whileHover={{ scale: 1.1 }}
