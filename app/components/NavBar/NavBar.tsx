@@ -133,7 +133,7 @@ const NavBar = () => {
         </details>
       </li>
       <li>
-        <Link href="/about">About</Link>
+        <Link href="/pages/about">About</Link>
       </li>
     </>
   );
