@@ -1,4 +1,5 @@
 import { Hero } from "./components/Hero/Hero";
+import MenuPage from "./components/Menu/MenuPage";
 import ItemOverview from "./components/Overview/ItemOverview";
 
 
@@ -11,6 +12,9 @@ export default function Home() {
       </div>
       <div>
         <ItemOverview />
+      </div>
+      <div>
+        <MenuPage/>
       </div>
     </div>
   );
