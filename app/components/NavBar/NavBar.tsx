@@ -91,6 +91,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { nav } from "framer-motion/client";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -146,96 +147,98 @@ const NavBar = () => {
   );
 
   return (
-    <motion.div
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div
-        className="shadow-lg rounded-xl 
-        bg-white/30 backdrop-blur-md  border border-white/20 z-50"
+    <nav className="sticky top-0 z-50">
+      <motion.div
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <div className="navbar max-w-7xl mx-auto px-4 py-3 justify-around">
-          {/* Left */}
-          <div>
+        <div
+          className="shadow-lg rounded-xl 
+        bg-white/30 backdrop-blur-md  border border-white/20 z-50"
+        >
+          <div className="navbar max-w-7xl mx-auto px-4 py-3 justify-around">
+            {/* Left */}
             <div>
-              <Link href="/" className="text-2xl font-bold text-orange-600">
-                TastGo
-              </Link>
+              <div>
+                <Link href="/" className="text-2xl font-bold text-orange-600">
+                  TastGo
+                </Link>
+              </div>
+            </div>
+
+            {/* Center (Desktop menu) */}
+            <div className="hidden lg:flex">
+              <ul className="menu menu-horizontal gap-4 font-medium text-gray-800">
+                {links}
+              </ul>
+            </div>
+
+            {/* Right (Auth + Button) */}
+            <div className="hidden lg:flex items-center gap-4">
+              <ul className="menu menu-horizontal font-medium text-gray-800">
+                {authLinks}
+              </ul>
+              <motion.a
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                href="/products"
+                className="btn bg-orange-500 text-white border-none hover:bg-orange-600 rounded-full px-6"
+              >
+                Explore
+              </motion.a>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="lg:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="btn btn-ghost btn-circle"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
             </div>
           </div>
+        </div>
 
-          {/* Center (Desktop menu) */}
-          <div className="hidden lg:flex">
-            <ul className="menu menu-horizontal gap-4 font-medium text-gray-800">
+        {/* Mobile dropdown */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="lg:hidden bg-white/40 backdrop-blur-md shadow-md border-t border-white/20"
+          >
+            <ul className="menu w-full p-4 flex flex-col gap-3 font-medium text-gray-800">
               {links}
-            </ul>
-          </div>
-
-          {/* Right (Auth + Button) */}
-          <div className="hidden lg:flex items-center gap-4">
-            <ul className="menu menu-horizontal font-medium text-gray-800">
               {authLinks}
             </ul>
-            <motion.a
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              href="/products"
-              className="btn bg-orange-500 text-white border-none hover:bg-orange-600 rounded-full px-6"
-            >
-              Explore
-            </motion.a>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="btn btn-ghost btn-circle"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {isOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile dropdown */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="lg:hidden bg-white/40 backdrop-blur-md shadow-md border-t border-white/20"
-        >
-          <ul className="menu w-full p-4 flex flex-col gap-3 font-medium text-gray-800">
-            {links}
-            {authLinks}
-          </ul>
-        </motion.div>
-      )}
-    </motion.div>
+          </motion.div>
+        )}
+      </motion.div>
+    </nav>
   );
 };
 

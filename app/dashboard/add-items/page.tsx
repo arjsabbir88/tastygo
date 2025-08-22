@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { create } from "domain";
 
 const AddProductForm = () => {
   const [formData, setFormData] = useState({
